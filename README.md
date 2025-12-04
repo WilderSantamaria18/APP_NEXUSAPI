@@ -9,21 +9,21 @@ Una aplicación móvil de comercio electrónico desarrollada en **Android con Ko
 
 ---
 
-## 📱 Descripción
+## Descripción
 
 **MvvmNexus** es una aplicación de tienda virtual que permite a los usuarios:
 
-- 🔐 **Registrarse e iniciar sesión** (con email/contraseña o Google Sign-In)
-- 🛍️ **Explorar productos** obtenidos desde una API externa
-- 📦 **Ver detalles de productos** con imágenes, precios y descripciones
-- ❤️ **Guardar productos en favoritos**
-- 🛒 **Añadir productos al carrito de compras**
-- 👤 **Gestionar perfil de usuario**
-- 🌙 **Cambiar entre tema claro y oscuro**
+-  **Registrarse e iniciar sesión** (con email/contraseña o Google Sign-In)
+-  **Explorar productos** obtenidos desde una API externa
+-  **Ver detalles de productos** con imágenes, precios y descripciones
+-  **Guardar productos en favoritos**
+-  **Añadir productos al carrito de compras**
+-  **Gestionar perfil de usuario**
+-  **Cambiar entre tema claro y oscuro**
 
 ---
 
-## 🏗️ Arquitectura
+##  Arquitectura
 
 La aplicación sigue el patrón de arquitectura **MVVM (Model-View-ViewModel)** con **Clean Architecture**:
 
@@ -52,22 +52,22 @@ app/
 
 ---
 
-## 🖥️ Pantallas de la App
+## Pantallas de la App
 
 | Pantalla | Descripción |
 |----------|-------------|
-| 🔐 **Login** | Inicio de sesión con email/contraseña o Google |
-| 📝 **Registro** | Crear nueva cuenta de usuario |
-| 🏠 **Home** | Lista de productos con búsqueda y filtros |
-| 📦 **Detalle Producto** | Información completa del producto |
-| ❤️ **Favoritos** | Productos guardados como favoritos |
-| 🛒 **Carrito** | Productos añadidos al carrito de compras |
-| 👤 **Perfil** | Información y configuración del usuario |
-| ⚙️ **Configuración** | Ajustes de tema (claro/oscuro) |
+|  **Login** | Inicio de sesión con email/contraseña o Google |
+|  **Registro** | Crear nueva cuenta de usuario |
+| **Home** | Lista de productos con búsqueda y filtros |
+|  **Detalle Producto** | Información completa del producto |
+|  **Favoritos** | Productos guardados como favoritos |
+|  **Carrito** | Productos añadidos al carrito de compras |
+|  **Perfil** | Información y configuración del usuario |
+|  **Configuración** | Ajustes de tema (claro/oscuro) |
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 ### Frontend
 - **Kotlin** - Lenguaje de programación principal
@@ -104,7 +104,7 @@ app/
 
 ---
 
-## ⚙️ Requisitos
+## Requisitos
 
 - **Android Studio** Hedgehog o superior
 - **JDK 11** o superior
@@ -114,7 +114,7 @@ app/
 
 ---
 
-## 🚀 Instalación y Configuración
+## Instalación y Configuración
 
 ### 1. Clonar el repositorio
 
@@ -151,7 +151,7 @@ cd APP_NEXUSAPI
 
 ---
 
-## 📂 Estructura de Dependencias
+## Estructura de Dependencias
 
 ```kotlin
 // Firebase
@@ -179,7 +179,7 @@ kotlinx-coroutines-android
 
 ---
 
-## 🔐 Autenticación
+## Autenticación
 
 La app soporta dos métodos de autenticación:
 
@@ -190,7 +190,7 @@ Los datos del usuario se sincronizan entre Firebase Firestore y la base de datos
 
 ---
 
-## 🌐 API de Productos
+## API de Productos
 
 La aplicación consume productos desde una API externa REST, mostrando:
 - Título del producto
@@ -202,27 +202,30 @@ La aplicación consume productos desde una API externa REST, mostrando:
 
 ---
 
-## 🎨 Temas
+## Temas
 
 La app incluye soporte para **tema claro y oscuro**, configurable desde la pantalla de ajustes. Las preferencias del tema se guardan localmente.
 
 ---
 
-## 👨‍💻 Autor
+## Autores
 
 **Wilder Santamaria**
 
 - GitHub: [@WilderSantamaria18](https://github.com/WilderSantamaria18)
 
+**Josias Enqriquez**
+
+- GitHub: [@JosiasEnriquezQ19](https://github.com/JosiasEnriquezQ19)
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 - [Firebase](https://firebase.google.com/) por los servicios de backend
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) por la UI moderna
