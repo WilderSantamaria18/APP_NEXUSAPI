@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".MvvmNexusApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_logonexusapi"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MvvmNexus"
+        android:usesCleartextTraffic="true">
+        
+
+        <activity
+            android:name=".presentation.view.LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 📝 REGISTRO ACTIVITY -->
+        <activity
+            android:name=".presentation.view.RegistroActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+            
+        <!-- 🏠 MAIN ACTIVITY - Para usuarios autenticados -->
+        <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop" />
+            
+        <!-- 🛍️ DETALLE PRODUCTO ACTIVITY -->
+        <activity
+            android:name=".presentation.view.DetalleProductoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".presentation.view.MainActivity" />
+            
+        <!-- 👤 PERFIL ACTIVITY -->
+        <activity
+            android:name=".presentation.view.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".presentation.view.MainActivity" />
+            
+        <!-- ❤️ FAVORITOS ACTIVITY -->
+        <activity
+            android:name=".presentation.view.FavoritosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".presentation.view.MainActivity" />
+            
+        <!-- 🛒 CARRITO ACTIVITY -->
+        <activity
+            android:name=".presentation.view.CartActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".presentation.view.MainActivity" />
+            
+    </application>
+
+</manifest>

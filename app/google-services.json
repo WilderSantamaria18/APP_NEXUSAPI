@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "508317673689",
+    "project_id": "nexusapi-77725",
+    "storage_bucket": "nexusapi-77725.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508317673689:android:4ab2437bd8fad15dd136c8",
+        "android_client_info": {
+          "package_name": "com.wilder.mvvmnexus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508317673689-h3qv00ghq5c5qu065sahmbvdceuf6vmp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wilder.mvvmnexus",
+            "certificate_hash": "c2995034b3f227046e8eca8238c5ad5a758b3b2f"
+          }
+        },
+        {
+          "client_id": "508317673689-18dn1r07nkto4a9761he0usm5absj35s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDsE10lT6npJHoC1-PurSEpqACc4Qz1GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508317673689-18dn1r07nkto4a9761he0usm5absj35s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
