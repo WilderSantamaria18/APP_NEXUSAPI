@@ -19,6 +19,7 @@ import com.wilder.mvvmnexus.utils.ThemeManager
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 
+@Suppress("DEPRECATION")
 class LoginActivity : ComponentActivity() {
 
     private lateinit var authViewModel: AuthViewModel
@@ -62,7 +63,7 @@ class LoginActivity : ComponentActivity() {
                         startActivity(Intent(this, RegistroActivity::class.java))
                     },
                     onGoogleSignInClick = {
-                        val signInIntent = servicioGoogle.obtenerClienteConSeleccionCuenta().signInIntent
+                        val signInIntent = servicioGoogle.obtenerClienteParaLogin().signInIntent
                         googleSignInLauncher.launch(signInIntent)
                     }
                 )

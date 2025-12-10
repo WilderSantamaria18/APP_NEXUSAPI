@@ -11,7 +11,7 @@ object ThemeManager {
     private const val KEY_IS_DARK_THEME = "is_dark_theme"
     private lateinit var prefs: SharedPreferences
 
-    private val _isDarkTheme = MutableStateFlow(true) // Default to dark
+    private val _isDarkTheme = MutableStateFlow(true)
     val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
 
     fun init(context: Context) {

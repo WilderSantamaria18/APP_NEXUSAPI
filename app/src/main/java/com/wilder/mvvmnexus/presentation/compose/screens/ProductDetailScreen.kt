@@ -7,7 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -20,6 +20,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +34,7 @@ import coil.compose.AsyncImage
 import com.wilder.mvvmnexus.domain.model.Producto
 import com.wilder.mvvmnexus.presentation.viewmodel.DetalleProductoViewModel
 import com.wilder.mvvmnexus.presentation.viewmodel.FavoritosViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,7 +104,7 @@ fun ProductDetailScreen(
                             containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.6f)
                         )
                     ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Regresar")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Regresar")
                     }
                 },
                 actions = {
@@ -277,6 +279,7 @@ fun BottomBarActions(
     onAddToCart: () -> Unit
 ) {
     var isPressed by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
     
     val buttonScale by animateFloatAsState(
         targetValue = if (isPressed) 0.95f else 1f,
@@ -318,8 +321,8 @@ fun BottomBarActions(
                     isPressed = true
                     onAddToCart()
                     // Reset después de un breve delay
-                    kotlinx.coroutines.GlobalScope.launch {
-                        kotlinx.coroutines.delay(150)
+                    scope.launch {
+                        delay(150)
                         isPressed = false
                     }
                 },

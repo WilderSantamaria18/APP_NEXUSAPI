@@ -16,6 +16,7 @@ import com.wilder.mvvmnexus.presentation.compose.theme.MvvmNexusTheme
 import com.wilder.mvvmnexus.presentation.viewmodel.AuthViewModel
 import com.wilder.mvvmnexus.presentation.viewmodel.AuthViewModelFactory
 
+@Suppress("DEPRECATION")
 class RegistroActivity : ComponentActivity() {
 
     private lateinit var authViewModel: AuthViewModel
@@ -59,7 +60,7 @@ class RegistroActivity : ComponentActivity() {
                         finish()
                     },
                     onGoogleSignInClick = {
-                        val signInIntent = servicioGoogle.obtenerClienteConSeleccionCuenta().signInIntent
+                        val signInIntent = servicioGoogle.obtenerClienteParaLogin().signInIntent
                         googleSignInLauncher.launch(signInIntent)
                     }
                 )

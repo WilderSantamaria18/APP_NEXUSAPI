@@ -1,15 +1,15 @@
 package com.wilder.mvvmnexus.domain.model
 
 
- // Representa la información de un usuario en la aplicación
+ // Representa la información de un usuario
 
 data class Usuario(
-    val uid: String = "",                    // ID único del usuario en Firebase
-    val email: String = "",                  // Correo electrónico
-    val nombreCompleto: String = "",         // Nombre completo del usuario
-    val fotoUrl: String = "",                // URL de la foto de perfil
-    val emailVerificado: Boolean = false,    // Si el email está verificado
-    val proveedor: String = ""               // "firebase"
+    val uid: String = "",
+    val email: String = "",
+    val nombreCompleto: String = "",
+    val fotoUrl: String = "",
+    val emailVerificado: Boolean = false,
+    val proveedor: String = ""
 ) {
     //obtiene el nombre a mostrar en el perfil
     fun obtenerNombreMostrar(): String {

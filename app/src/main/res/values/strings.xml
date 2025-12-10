@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">NexusAPI</string>
     
-    <!-- 🔍 Web Client ID para Google Sign-In -->
+    <!-- Web Client ID -->
     <string name="default_web_client_id">508317673689-18dn1r07nkto4a9761he0usm5absj35s.apps.googleusercontent.com</string>
     
-    <!-- 🎨 Textos de UI -->
+    <!-- UI -->
     <string name="continuar_con_google">Continuar con Google</string>
     <string name="crear_cuenta_google">Crear cuenta con Google</string>
 </resources>

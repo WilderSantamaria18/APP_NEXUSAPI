@@ -17,6 +17,9 @@ interface RepositorioAuth {
     suspend fun obtenerUsuarioActual(): Usuario?
     
     // Métodos para persistencia local del perfil
-    fun obtenerUsuarioLocal(uid: String): Flow<Usuario?>
+
     suspend fun guardarUsuarioLocal(usuario: Usuario)
+    
+    // Recuperación de contraseña
+    suspend fun enviarCorreoRestablecimiento(email: String): ResultadoAuth<Unit>
 }

@@ -22,6 +22,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import com.wilder.mvvmnexus.R
 import com.wilder.mvvmnexus.domain.model.EstadoAuth
 import com.wilder.mvvmnexus.presentation.compose.components.NexusButton
@@ -40,7 +43,10 @@ fun LoginScreen(
     
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
+    var showResetDialog by remember { mutableStateOf(false) }
+    var resetEmail by remember { mutableStateOf("") }
 
     // Efecto para manejar el estado de autenticación
     LaunchedEffect(authState) {
@@ -100,20 +106,33 @@ fun LoginScreen(
             value = password,
             onValueChange = { password = it },
             label = "Contraseña",
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Password)
+            visualTransformation = if (passwordVisible) androidx.compose.ui.text.input.VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                val image = if (passwordVisible)
+                    androidx.compose.material.icons.Icons.Filled.Visibility
+                else
+                    androidx.compose.material.icons.Icons.Filled.VisibilityOff
+
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(imageVector = image, contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña")
+                }
+            }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Olvidé mi contraseña (Placeholder funcional)
+        // Olvidé mi contraseña
         Text(
             text = "¿Olvidaste tu contraseña?",
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(Alignment.End)
-                .clickable { /* TODO: Implementar recuperación */ }
+                .clickable { 
+                    resetEmail = email 
+                    showResetDialog = true 
+                }
                 .padding(4.dp)
         )
 
@@ -171,7 +190,7 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        // Footer Registro
+        // Pestaña de Registro
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -187,5 +206,38 @@ fun LoginScreen(
                 modifier = Modifier.clickable(onClick = onNavigateToRegister)
             )
         }
+    }
+
+    if (showResetDialog) {
+        AlertDialog(
+            onDismissRequest = { showResetDialog = false },
+            title = { Text("Restablecer Contraseña") },
+            text = {
+                Column {
+                    Text("Ingresa tu correo electrónico para recibir un enlace de restablecimiento.")
+                    Spacer(modifier = Modifier.height(16.dp))
+                    NexusTextField(
+                        value = resetEmail,
+                        onValueChange = { resetEmail = it },
+                        label = "Correo electrónico"
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.restablecerPassword(resetEmail)
+                        showResetDialog = false
+                    }
+                ) {
+                    Text("Enviar")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showResetDialog = false }) {
+                    Text("Cancelar")
+                }
+            }
+        )
     }
 }

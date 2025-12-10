@@ -14,8 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 
 /**
- * IMPLEMENTACIÓN FIREBASE DEL REPOSITORIO
- * Maneja toda la lógica de autenticación con Firebase y persistencia local con Room
+ * Se maneja toda la lógica de autenticación con Firebase y persistencia local con Room
  */
 class RepositorioFirebaseAuth(
     private val usuarioDao: UsuarioDao
@@ -116,7 +115,7 @@ class RepositorioFirebaseAuth(
     }
     
     /**
-     * 🚪 Cerrar sesión
+     * Cerrar sesión
      */
     override suspend fun cerrarSesion(): Unit {
         try {
@@ -133,26 +132,10 @@ class RepositorioFirebaseAuth(
         return firebaseAuth.currentUser?.aUsuario()
     }
     
-    /**
-     *  Obtener usuario local (Room)
-     */
-    override fun obtenerUsuarioLocal(uid: String): Flow<Usuario?> {
-        return usuarioDao.obtenerUsuarioPorId(uid).map { entity ->
-            entity?.let {
-                Usuario(
-                    uid = it.id,
-                    nombreCompleto = it.nombre,
-                    email = it.email,
-                    fotoUrl = it.fotoUrl ?: "",
-                    emailVerificado = true, // Asumimos verificado si está en local
-                    proveedor = "local"
-                )
-            }
-        }
-    }
+
 
     /**
-     * 💾 Guardar usuario local (Room)
+     *  Guardar usuario local (Room)
      */
     override suspend fun guardarUsuarioLocal(usuario: Usuario) {
         val entity = UsuarioEntity(
@@ -163,9 +146,25 @@ class RepositorioFirebaseAuth(
         )
         usuarioDao.insertarUsuario(entity)
     }
+
+    /**
+     *  Enviar correo de restablecimiento de contraseña
+     */
+    override suspend fun enviarCorreoRestablecimiento(email: String): ResultadoAuth<Unit> {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            ResultadoAuth.Exito(Unit)
+        } catch (e: FirebaseAuthInvalidUserException) {
+            ResultadoAuth.Error("No existe una cuenta con este email")
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            ResultadoAuth.Error("El email no es válido")
+        } catch (e: Exception) {
+            ResultadoAuth.Error("Error al enviar correo: ${e.message}")
+        }
+    }
     
     /**
-     * 🔄 FUNCIÓN DE EXTENSIÓN
+     * FUNCIÓN DE EXTENSIÓN
      * Convierte FirebaseUser a Usuario del dominio
      */
     private fun FirebaseUser.aUsuario(): Usuario {

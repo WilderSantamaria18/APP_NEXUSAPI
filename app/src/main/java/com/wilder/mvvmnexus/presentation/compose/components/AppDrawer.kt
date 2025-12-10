@@ -74,7 +74,7 @@ fun AppDrawer(
         // Opciones del Menú
         NavigationDrawerItem(
             label = { Text("Inicio") },
-            selected = true, // Por ahora fijo en inicio
+            selected = true,
             onClick = { 
                 onNavigateTo("inicio")
                 onCloseDrawer()

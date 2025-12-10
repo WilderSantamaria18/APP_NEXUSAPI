@@ -138,20 +138,7 @@ class AuthViewModel(
         }
     }
     
-    fun reenviarVerificacionEmail() {
-        viewModelScope.launch {
-            val resultado = casosUsoAuth.reenviarVerificacionEmail()
-            when (resultado) {
-                is ResultadoAuth.Exito -> {
-                    mostrarMensaje("Email de verificación reenviado")
-                }
-                is ResultadoAuth.Error -> {
-                    mostrarMensaje("Error: ${resultado.mensaje}")
-                }
-                is ResultadoAuth.Cargando -> { }
-            }
-        }
-    }
+
     
     private fun observarEstadoAutenticacion() {
         viewModelScope.launch {

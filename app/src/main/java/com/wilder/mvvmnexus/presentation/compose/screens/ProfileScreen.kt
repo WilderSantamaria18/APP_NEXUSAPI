@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.wilder.mvvmnexus.domain.model.EstadoAuth
 import com.wilder.mvvmnexus.presentation.viewmodel.AuthViewModel
+import com.wilder.mvvmnexus.presentation.compose.components.NexusButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,6 +34,7 @@ fun ProfileScreen(
 ) {
     val authState by viewModel.estadoAuth.collectAsState(initial = null)
     val usuario = (authState as? EstadoAuth.Autenticado)?.usuario
+    var showResetDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -37,7 +42,7 @@ fun ProfileScreen(
                 title = { Text("Mi Perfil") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Regresar")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Regresar")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -96,6 +101,15 @@ fun ProfileScreen(
                     label = "Correo Electrónico",
                     value = usuario?.email ?: "No disponible"
                 )
+
+                if (usuario?.proveedor == "firebase") {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    NexusButton(
+                        text = "Restablecer Contraseña",
+                        onClick = { showResetDialog = true },
+                        isLoading = false
+                    )
+                }
                 
                 Spacer(modifier = Modifier.height(32.dp))
                 
@@ -108,6 +122,29 @@ fun ProfileScreen(
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }
+    }
+
+    if (showResetDialog) {
+        AlertDialog(
+            onDismissRequest = { showResetDialog = false },
+            title = { Text("Restablecer Contraseña") },
+            text = { Text("¿Deseas enviar un correo para restablecer tu contraseña a ${usuario?.email}?") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        usuario?.email?.let { viewModel.restablecerPassword(it) }
+                        showResetDialog = false
+                    }
+                ) {
+                    Text("Enviar")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showResetDialog = false }) {
+                    Text("Cancelar")
+                }
+            }
+        )
     }
 }
 

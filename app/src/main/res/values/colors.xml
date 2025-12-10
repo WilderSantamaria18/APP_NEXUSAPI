@@ -1,54 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  PALETA TEMU STYLE - ALTO CONTRASTE -->
-    <color name="temu_primary">#FF4444</color>             <!-- Rojo vibrante Temu -->
-    <color name="temu_primary_dark">#CC0000</color>        <!-- Rojo oscuro intenso -->
-    <color name="temu_secondary">#FF6B35</color>           <!-- Naranja energético -->
-    <color name="temu_accent">#FFA500</color>              <!-- Naranja dorado -->
+    <!-- Paleta Principal -->
+    <color name="nexus_primary">#FF4444</color>
+    <color name="nexus_primary_dark">#CC0000</color>
+    <color name="nexus_secondary">#FF6B35</color>
+    <color name="nexus_accent">#FFA500</color>
     
-    <!-- 🎨 FONDOS TEMU STYLE -->
-    <color name="temu_background">#FAFAFA</color>          <!-- Gris muy claro -->
-    <color name="temu_surface">#FFFFFF</color>             <!-- Blanco puro -->
-    <color name="temu_card">#F5F5F5</color>                <!-- Tarjetas claras -->
-    <color name="temu_divider">#E0E0E0</color>             <!-- Divisores definidos -->
+    <!-- Fondos -->
+    <color name="nexus_background">#FAFAFA</color>
+    <color name="nexus_surface">#FFFFFF</color>
+    <color name="nexus_card">#F5F5F5</color>
+    <color name="nexus_divider">#E0E0E0</color>
     
-    <!-- 📝 TEXTOS TEMU STYLE -->
-    <color name="temu_text_primary">#000000</color>        <!-- Negro puro para contraste -->
-    <color name="temu_text_secondary">#424242</color>      <!-- Gris oscuro -->
-    <color name="temu_text_hint">#757575</color>           <!-- Gris medio -->
-    <color name="temu_text_disabled">#BDBDBD</color>       <!-- Gris claro -->
+    <!-- Textos -->
+    <color name="nexus_text_primary">#000000</color>
+    <color name="nexus_text_secondary">#424242</color>
+    <color name="nexus_text_hint">#757575</color>
+    <color name="nexus_text_disabled">#BDBDBD</color>
     
-    <!-- 🔄 ESTADOS TEMU INTERACTIVOS -->
-    <color name="temu_interactive">#2196F3</color>         <!-- Azul brillante -->
-    <color name="temu_hover">#1976D2</color>               <!-- Azul más oscuro -->
-    <color name="temu_pressed">#0D47A1</color>             <!-- Azul profundo -->
+    <!-- Estados Interactivos -->
+    <color name="nexus_interactive">#2196F3</color>
+    <color name="nexus_hover">#1976D2</color>
+    <color name="nexus_pressed">#0D47A1</color>
     
-    <!-- ✅ ESTADOS TEMU SEMÁNTICOS -->
-    <color name="temu_success">#4CAF50</color>             <!-- Verde vibrante -->
-    <color name="temu_warning">#FF9800</color>             <!-- Naranja advertencia -->
-    <color name="temu_error">#F44336</color>               <!-- Rojo error -->
-    <color name="temu_info">#2196F3</color>                <!-- Azul información -->
+    <!-- Estados Semánticos -->
+    <color name="nexus_success">#4CAF50</color>
+    <color name="nexus_warning">#FF9800</color>
+    <color name="nexus_error">#F44336</color>
+    <color name="nexus_info">#2196F3</color>
     
-    <!-- 🎭 SOMBRAS Y EFECTOS -->
-    <color name="shadow_light">#1A000000</color>           <!-- Sombra ligera -->
-    <color name="shadow_medium">#33000000</color>          <!-- Sombra media -->
-    <color name="overlay_dark">#80000000</color>           <!-- Overlay oscuro -->
+    <!-- Sombras y Efectos -->
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#33000000</color>
+    <color name="overlay_dark">#80000000</color>
     
-    <!-- ⚪ BÁSICOS -->
+    <!-- Básicos -->
     <color name="pure_white">#FFFFFF</color>
     <color name="pure_black">#000000</color>
     <color name="transparent">#00000000</color>
     
-    <!-- 🔄 COMPATIBILIDAD -->
+    <!-- Compatibilidad -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="purple_500">#6200EE</color>
     
-    <!-- 🔄 ALIAS PARA COMPATIBILIDAD CON LAYOUTS ANTIGUOS -->
-    <color name="text_primary">@color/temu_text_primary</color>
-    <color name="text_secondary">@color/temu_text_secondary</color>
-    <color name="text_tertiary">@color/temu_text_hint</color>
-    <color name="nexus_primary">@color/temu_primary</color>
-    <color name="nexus_accent">@color/temu_accent</color>
-    <color name="nexus_text_hint">@color/temu_text_hint</color>
+    <!-- Alias -->
+    <color name="text_primary">@color/nexus_text_primary</color>
+    <color name="text_secondary">@color/nexus_text_secondary</color>
+    <color name="text_tertiary">@color/nexus_text_hint</color>
+
 </resources>

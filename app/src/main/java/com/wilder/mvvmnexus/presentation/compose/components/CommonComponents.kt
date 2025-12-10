@@ -19,7 +19,8 @@ fun NexusTextField(
     modifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    isError: Boolean = false
+    isError: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
         value = value,
@@ -39,7 +40,8 @@ fun NexusTextField(
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         isError = isError,
-        singleLine = true
+        singleLine = true,
+        trailingIcon = trailingIcon
     )
 }
 

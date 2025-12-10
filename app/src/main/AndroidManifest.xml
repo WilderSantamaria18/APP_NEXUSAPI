@@ -29,42 +29,42 @@
             </intent-filter>
         </activity>
         
-        <!-- 📝 REGISTRO ACTIVITY -->
+        <!-- REGISTRO ACTIVITY -->
         <activity
             android:name=".presentation.view.RegistroActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
             
-        <!-- 🏠 MAIN ACTIVITY - Para usuarios autenticados -->
+        <!-- MAIN ACTIVITY - Para usuarios autenticados -->
         <activity
             android:name=".presentation.view.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:launchMode="singleTop" />
             
-        <!-- 🛍️ DETALLE PRODUCTO ACTIVITY -->
+        <!-- DETALLE PRODUCTO ACTIVITY -->
         <activity
             android:name=".presentation.view.DetalleProductoActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:parentActivityName=".presentation.view.MainActivity" />
             
-        <!-- 👤 PERFIL ACTIVITY -->
+        <!-- PERFIL ACTIVITY -->
         <activity
             android:name=".presentation.view.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:parentActivityName=".presentation.view.MainActivity" />
             
-        <!-- ❤️ FAVORITOS ACTIVITY -->
+        <!-- FAVORITOS ACTIVITY -->
         <activity
             android:name=".presentation.view.FavoritosActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:parentActivityName=".presentation.view.MainActivity" />
             
-        <!-- 🛒 CARRITO ACTIVITY -->
+        <!-- CARRITO ACTIVITY -->
         <activity
             android:name=".presentation.view.CartActivity"
             android:exported="false"
