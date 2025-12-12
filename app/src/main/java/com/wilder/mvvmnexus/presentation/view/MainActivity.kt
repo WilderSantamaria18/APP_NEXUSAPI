@@ -47,6 +47,11 @@ class MainActivity : ComponentActivity() {
         authViewModel = androidx.lifecycle.ViewModelProvider(this, AuthViewModelFactory(casosUsoAuth, casosUsoCarrito)).get(AuthViewModel::class.java)
         cartViewModel = androidx.lifecycle.ViewModelProvider(this, CartViewModelFactory(casosUsoCarrito, casosUsoAuth)).get(CartViewModel::class.java)
         
+        val favoritoDao = database.favoritoDao()
+        val repositorioFavoritos = com.wilder.mvvmnexus.data.repository.RepositorioFavoritosImpl(favoritoDao)
+        val casosUsoFavoritos = com.wilder.mvvmnexus.domain.usecase.CasosUsoFavoritos(repositorioFavoritos)
+        val favoritosViewModel = androidx.lifecycle.ViewModelProvider(this, com.wilder.mvvmnexus.presentation.viewmodel.FavoritosViewModelFactory(casosUsoFavoritos, casosUsoAuth)).get(com.wilder.mvvmnexus.presentation.viewmodel.FavoritosViewModel::class.java)
+        
         setContent {
             val isDarkTheme by themeViewModel.isDarkTheme.collectAsState(initial = true)
             MvvmNexusTheme(darkTheme = isDarkTheme) {
@@ -57,6 +62,7 @@ class MainActivity : ComponentActivity() {
                         viewModel = viewModel,
                         authViewModel = authViewModel,
                         cartViewModel = cartViewModel,
+                        favoritosViewModel = favoritosViewModel,
                         themeViewModel = themeViewModel,
                         onProductClick = { productoId ->
                             val intent = Intent(this, DetalleProductoActivity::class.java).apply {

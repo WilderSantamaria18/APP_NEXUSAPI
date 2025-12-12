@@ -2,34 +2,26 @@ package com.wilder.mvvmnexus.presentation.compose.screens
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.wilder.mvvmnexus.presentation.viewmodel.MainViewModel
-import com.wilder.mvvmnexus.presentation.viewmodel.ThemeViewModel
-import com.wilder.mvvmnexus.presentation.compose.components.ProductItem
-
+import androidx.compose.ui.draw.scale
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.draw.scale
-import com.wilder.mvvmnexus.domain.model.EstadoAuth
-import com.wilder.mvvmnexus.domain.model.Usuario
-import com.wilder.mvvmnexus.presentation.compose.components.AppDrawer
+import com.wilder.mvvmnexus.presentation.viewmodel.MainViewModel
+import com.wilder.mvvmnexus.presentation.viewmodel.ThemeViewModel
 import com.wilder.mvvmnexus.presentation.viewmodel.AuthViewModel
 import com.wilder.mvvmnexus.presentation.viewmodel.CartViewModel
+import com.wilder.mvvmnexus.presentation.viewmodel.FavoritosViewModel
+import com.wilder.mvvmnexus.presentation.compose.components.ProductItem
+import com.wilder.mvvmnexus.presentation.compose.components.AppDrawer
+import com.wilder.mvvmnexus.domain.model.EstadoAuth
+import com.wilder.mvvmnexus.domain.model.Usuario
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -38,6 +30,7 @@ fun ProductListScreen(
     viewModel: MainViewModel,
     authViewModel: AuthViewModel,
     cartViewModel: CartViewModel,
+    favoritosViewModel: com.wilder.mvvmnexus.presentation.viewmodel.FavoritosViewModel,
     themeViewModel: ThemeViewModel,
     onProductClick: (Int) -> Unit,
     onNavigateToProfile: () -> Unit,
@@ -50,18 +43,40 @@ fun ProductListScreen(
     val isLoading by viewModel.isLoading.observeAsState(initial = false)
     val error by viewModel.error.observeAsState(initial = null)
     
-    // Estado del usuario para el Drawer
     val authState by authViewModel.estadoAuth.collectAsState(initial = null)
     val usuario = (authState as? EstadoAuth.Autenticado)?.usuario
 
-    // Cantidad de productos en el carrito
     val cantidadProductos by cartViewModel.cantidadProductos.collectAsState()
+    val favoritos by favoritosViewModel.favoritos.collectAsState()
     
-    // Estado de animación del carrito
     var animateCart by remember { mutableStateOf(false) }
     var previousCount by remember { mutableStateOf(0) }
+
+    var selectedCategory by remember { mutableStateOf<String?>(null) }
+    var sortOption by remember { mutableStateOf("Default") } 
+
+    val filteredProducts = remember(productos, favoritos, selectedCategory, sortOption) {
+        var list = if (selectedCategory != null) {
+            productos.filter { it.categoria == selectedCategory }
+        } else {
+            productos
+        }
+
+        when (sortOption) {
+            "PriceAsc" -> list.sortedBy { it.precio }
+            "PriceDesc" -> list.sortedByDescending { it.precio }
+            "Favorites" -> {
+                val favoriteIds = favoritos.map { it.productoId }.toSet()
+                list.sortedByDescending { it.id in favoriteIds }
+            }
+            else -> list
+        }
+    }
+
+    val categories = remember(productos) {
+        productos.map { it.categoria }.distinct()
+    }
     
-    // Detectar cuando se agrega un producto al carrito
     LaunchedEffect(cantidadProductos) {
         if (cantidadProductos > previousCount && previousCount > 0) {
             animateCart = true
@@ -69,7 +84,6 @@ fun ProductListScreen(
         previousCount = cantidadProductos
     }
     
-    // Animación de escala con rebote
     val scale by animateFloatAsState(
         targetValue = if (animateCart) 1.3f else 1f,
         animationSpec = spring(
@@ -174,15 +188,62 @@ fun ProductListScreen(
                         )
                     }
                     else -> {
-                        LazyColumn(
-                            contentPadding = PaddingValues(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            items(productos) { producto ->
-                                ProductItem(
-                                    producto = producto,
-                                    onClick = { onProductClick(producto.id) }
-                                )
+                        Column {
+                            androidx.compose.foundation.lazy.LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp, horizontal = 16.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                item {
+                                    FilterChip(
+                                        selected = sortOption == "Default",
+                                        onClick = { sortOption = "Default" },
+                                        label = { Text("Todo") }
+                                    )
+                                }
+                                item {
+                                    FilterChip(
+                                        selected = sortOption == "Favorites",
+                                        onClick = { sortOption = "Favorites" },
+                                        label = { Text("Favoritos") }
+                                    )
+                                }
+                                item {
+                                    FilterChip(
+                                        selected = sortOption == "PriceDesc",
+                                        onClick = { sortOption = "PriceDesc" },
+                                        label = { Text("Precio Max") }
+                                    )
+                                }
+                                item {
+                                    FilterChip(
+                                        selected = sortOption == "PriceAsc",
+                                        onClick = { sortOption = "PriceAsc" },
+                                        label = { Text("Precio Min") }
+                                    )
+                                }
+                                items(categories) { category ->
+                                    FilterChip(
+                                        selected = selectedCategory == category,
+                                        onClick = { 
+                                            selectedCategory = if (selectedCategory == category) null else category 
+                                        },
+                                        label = { Text(category) }
+                                    )
+                                }
+                            }
+
+                            LazyColumn(
+                                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                items(filteredProducts) { producto ->
+                                    ProductItem(
+                                        producto = producto,
+                                        onClick = { onProductClick(producto.id) }
+                                    )
+                                }
                             }
                         }
                     }
