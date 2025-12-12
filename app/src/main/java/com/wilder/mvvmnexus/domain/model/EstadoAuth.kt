@@ -1,13 +1,9 @@
 package com.wilder.mvvmnexus.domain.model
 
-/**
- * Modelo de estados de la autenticación de usuario
- */
+
+//Modelo de estados de la autenticación de usuario
+
 sealed class EstadoAuth {
-    
-    /**
-     *  Estado de carga - Verificando autenticación
-     */
     data object Cargando : EstadoAuth()
 
     data object NoAutenticado : EstadoAuth()
