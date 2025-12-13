@@ -1,4 +1,4 @@
-# 🛒 MvvmNexus - App de E-Commerce para Android
+# 🛒 NexusApi - App de E-Commerce para Android
 
 Una aplicación móvil de comercio electrónico desarrollada en **Android con Kotlin**, utilizando arquitectura **MVVM (Model-View-ViewModel)** y tecnologías modernas como **Jetpack Compose**, **Firebase** y **Room Database**.
 
@@ -11,7 +11,7 @@ Una aplicación móvil de comercio electrónico desarrollada en **Android con Ko
 
 ## Descripción
 
-**MvvmNexus** es una aplicación de tienda virtual que permite a los usuarios:
+**NexusApi** es una aplicación de tienda virtual que permite a los usuarios:
 
 -  **Registrarse e iniciar sesión** (con email/contraseña o Google Sign-In)
 -  **Explorar productos** obtenidos desde una API externa
